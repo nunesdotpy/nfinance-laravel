@@ -10,7 +10,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function fetch($url, $method, $data = null, $token = null, $exception = 0){
+    public static function fetch($url, $method, $data = null, $token = null, $exception = 0){
 
         $ch = curl_init();
 
@@ -52,5 +52,28 @@ class Controller extends BaseController
         }
 
         return $response;
+    }
+
+    public static function refreshToken($token){
+        $ch = curl_init();
+
+        $timeout = 5;
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(array("token" => $token)));
+        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+
+        curl_setopt ($ch, CURLOPT_URL, env("API_URL")."auth/refresh");
+        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        $file_contents = curl_exec($ch);
+        $httpcode = curl_getinfo($ch);
+        curl_close($ch);
+
+       $response = json_decode($file_contents, true);
+       $response['httpcode'] = $httpcode['http_code'];
+
+       session(["token" => $response['data']["token"]]);
+       session()->save();
+
+       return $response['data']["token"];
     }
 }
