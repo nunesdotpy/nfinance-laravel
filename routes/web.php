@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Login;
+use App\Livewire\Balance\UserTransactions;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,16 +25,14 @@ Route::get('/', function () {
 Route::get('/login', Login::class)->name('login');
 Route::get('/register', Register::class)->name('register');
 Route::group(['middleware' => 'authenticateLogin'], function () {
-    Route::get('/home', function () {
-        return view('welcome');
-    })->name('home');
-
-    Route::get('/', function () {
-        return redirect()->route('home');
-    });
-
     Route::get('/logout', function () {
         session()->flush();
         return redirect()->route('login');
     })->name('logout');
+    Route::get('/home', [DashboardController::class, 'index'])->name('home');
+    Route::get('/', function () {
+        return redirect()->route('home');
+    });
+
+    Route::get('/balance', UserTransactions::class)->name('usertransaction');
 });
