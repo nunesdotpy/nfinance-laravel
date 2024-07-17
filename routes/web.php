@@ -36,3 +36,7 @@ Route::group(['middleware' => 'authenticateLogin'], function () {
 
     Route::get('/balance', UserTransactions::class)->name('usertransaction');
 });
+
+Route::get('/{any}', function () {
+    return redirect()->route('home');
+})->where('any', '.*');
