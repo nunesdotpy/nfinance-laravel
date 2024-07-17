@@ -14,10 +14,9 @@ class Login extends Component
     {
         $request = $this->only(['email', 'password']);
         $response = Controller::fetch(env("API_URL")."login", "POST",$request);
-        
+
         if($response['httpcode'] != 200){
-            session()->flash('error', $response['message']);
-            return;
+            return back()->with('error', $response['message']);
         }
 
         session($response['data']);
