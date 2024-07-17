@@ -1,0 +1,15 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url("../css/navbar.css");
+
+:root {
+    --primary: #090B11;
+    --secundary: #161621;
+    --green: #66C56F;
+    --red: #F44747;
+    --white: #FFFFFF;
+}
+
+body {
+    background: var(--primary)!important;
+    color: var(--white)!important;
+}
