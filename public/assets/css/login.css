@@ -1,0 +1,51 @@
+.login .aside {
+    height: 100vh;
+    background: rgb(52,247,204);
+    background: -moz-linear-gradient(-120deg, rgba(52,247,204,1) 10%, rgba(102,197,111,1) 100%);
+    background: -webkit-linear-gradient(-120deg, rgba(52,247,204,1) 10%, rgba(102,197,111,1) 100%);
+    background: linear-gradient(-120deg, rgba(52,247,204,1) 10%, rgba(102,197,111,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#34f7cc",endColorstr="#66c56f",GradientType=1);
+    color: black!important;
+}
+
+.login form {
+    margin: 24px 0;
+}
+
+.login form div{
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+}
+.login form div:nth-child(3){
+    margin: 0;
+}
+
+.login form input{
+    padding: 4px;
+    border: 2px solid var(--green);
+    border-radius: 8px;
+}
+.login form button{
+    padding: 8px;
+    border: 1px solid var(--green);
+    border-radius: 8px;
+    background-color: var(--green);
+    color: var(--white);
+    cursor: pointer;
+    transition: 200ms;
+}
+.login form button:hover{
+    background-color: var(--primary);
+    color: var(--green);
+    transition: 200ms;
+}
+.login a{
+    color: var(--green);
+    text-decoration: underline;
+    transition: 200ms;
+}
+.login a:hover{
+    color: var(--white);
+    transition: 200ms;
+}
