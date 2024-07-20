@@ -29,8 +29,8 @@ class Controller extends BaseController
         }
 
         if($token){
-            $authorization = "Authorization: Bearer ".$token;
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization ));
+            $authorization = "x-acess-authorization: ".$token;
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', $authorization ));
         }else{
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         }
@@ -46,10 +46,10 @@ class Controller extends BaseController
         $response = json_decode($file_contents, true);
         $response['httpcode'] = $httpcode['http_code'];
 
-        if($response['httpcode'] == "401"){
-            $token = self::refreshToken($token);
-            return $this->fetch($url, $method, $data, $token);
-        }
+        // if($response['httpcode'] == "401"){
+        //     $token = self::refreshToken($token);
+        //     return $this->fetch($url, $method, $data, $token);
+        // }
 
         return $response;
     }
