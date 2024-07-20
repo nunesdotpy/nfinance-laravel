@@ -1,5 +1,6 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 @import url("../css/navbar.css");
+@import url("../css/transaction.css");
 
 :root {
     --primary: #090B11;
@@ -11,7 +12,7 @@
 }
 
 body {
-    background: var(--primary)!important;
+    background: var(--secundary)!important;
     color: var(--white)!important;
 }
 input{
