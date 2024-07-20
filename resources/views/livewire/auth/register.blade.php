@@ -1,5 +1,12 @@
-<div>
+<div class="register">
+    <link rel="stylesheet" href="{{ asset('assets/css/register.css') }}">
+    <h1>New Account</h1>
     <div>
+        @if (Session::has('error'))
+            <div class="alert alert-danger">
+                {{ Session::get('error') }}
+            </div>
+        @endif
         <form wire:submit="register">
             @csrf
             <div>
@@ -19,9 +26,9 @@
                 <input id="passwordVerify" type="password" wire:model="passwordVerify" required>
             </div>
             <div>
-                <button type="submit">Register</button>
+                <button class="btn-primary" type="submit">Register</button>
             </div>
         </form>
+        <div class="d-flex justify-content-end"><a href="{{ route('login') }}">Login</a></div>
     </div>
-    
 </div>
