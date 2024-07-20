@@ -12,8 +12,9 @@ class UserTransactions extends Component
 
     public function mount()
     {
-        // dd($this->user);
-        // $this->transactions = Controller::fetch(env("API_URL")."/spent/index/$user->id", "GET", ["company_id" => session("company_id")], session("token"), 1);
+        $userid = $this->user['id'];
+        $transactions = Controller::fetch(env("API_URL") . "spent/index/$userid", "GET", null, session("token"));
+        $this->transactions = $transactions['data'];
     }
 
     public function render()
