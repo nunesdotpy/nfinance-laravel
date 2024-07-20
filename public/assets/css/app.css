@@ -7,9 +7,68 @@
     --green: #66C56F;
     --red: #F44747;
     --white: #FFFFFF;
+    --grey: #A0A0A0;
 }
 
 body {
     background: var(--primary)!important;
     color: var(--white)!important;
+}
+input{
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+    padding: 4px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+}
+input:focus{
+    border: 2px solid var(--green);
+    outline: none;
+}
+a{
+    color: var(--green)!important;
+    text-decoration: underline;
+    transition: 200ms;
+}
+a:hover{
+    color: var(--white)!important;
+    transition: 200ms;
+}
+.dashboard{
+    max-width: 600px;
+    margin: auto;
+}
+.dropshadow{
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+}
+.btn-primary{
+    all: unset;
+    padding: 8px;
+    border: 1px solid var(--green);
+    border-radius: 8px!important;
+    background-color: var(--green);
+    color: var(--white);
+    text-align: center;
+    transition: 200ms;
+}
+.btn-primary:hover{
+    cursor: pointer;
+    background-color: var(--primary);
+    color: var(--green);
+    transition: 200ms;
+}
+.btn-secundary{
+    all: unset;
+    padding: 8px;
+    border: 1px solid var(--green);
+    border-radius: 8px!important;
+    background-color: transparent;
+    color: var(--green);
+    text-align: center;
+    transition: 200ms;
+}
+.btn-secundary:hover{
+    cursor: pointer;
+    border: 1px solid var(--white);
+    color: var(--white);
+    transition: 200ms;
 }

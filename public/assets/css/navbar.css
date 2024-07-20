@@ -39,3 +39,9 @@ nav button{
 nav button i{
     font-size: 48px;
 }
+nav a, nav button{
+    color: var(--white)!important;
+}
+nav a:hover, nav button:hover{
+    color: var(--green)!important;
+}
