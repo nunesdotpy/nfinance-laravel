@@ -1,0 +1,14 @@
+/* alinha tela de registro ao centro */
+.content {
+    height: 100vh;
+    align-content: center;
+}
+.register {
+    margin: auto;
+    max-width: 400px;
+}
+.register form div{
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+}
