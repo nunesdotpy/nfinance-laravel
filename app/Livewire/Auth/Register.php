@@ -15,8 +15,12 @@ class Register extends Component
     public function register()
     {
         $request = $this->only(['name', 'email', 'password', 'passwordVerify']);
-        Controller::fetch(env("API_URL")."register", "POST",$request);
+        $response = Controller::fetch(env("API_URL")."register", "POST",$request);
         
+        if($response['httpcode'] != 200){
+            return back()->with('error', $response['message']);
+        }
+
         return redirect()->route('login');
     }
 
