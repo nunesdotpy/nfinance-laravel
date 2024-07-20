@@ -6,7 +6,11 @@
         <h2>Sua plataforma de gestão financeira</h2>
     </div>
     <div class="align-content-center m-auto">
-        
+        @if (Session::has('error'))
+            <div class="alert alert-danger">
+                {{ Session::get('error') }}
+            </div>
+        @endif
         <form wire:submit="login">
             @csrf
             <div>
@@ -20,19 +24,12 @@
             <div class="text-end">
                 <a href="jaja">Forgot your password?</a>
             </div>
-            @if(Session::has('error'))
-            <div class="alert alert-danger">
-                {{ Session::get('error') }}
-            </div>
-            @endif
             <div>
-                <button type="submit">Login</button>
+                <button class="btn-primary" type="submit">Login</button>
             </div>
         </form>
         <div>
             <a href="{{ route('register') }}">Register</a>
         </div>
-        
-        
     </div>
 </div>
