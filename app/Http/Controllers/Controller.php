@@ -10,34 +10,35 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public static function fetch($url, $method, $data = null, $token = null, $exception = 0){
+    public static function fetch($url, $method, $data = null, $token = null, $exception = 0)
+    {
 
         $ch = curl_init();
 
         $timeout = 5;
 
-        if($method=="POST"){
+        if ($method == "POST") {
             curl_setopt($ch, CURLOPT_POST, true);
         }
 
-        if($exception == 1 || $method!="POST" && $method!="GET"){
+        if ($exception == 1 || $method != "POST" && $method != "GET") {
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
         }
 
-        if($method=="POST" || $method=="PUT" || $exception == 1){
+        if ($method == "POST" || $method == "PUT" || $exception == 1) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         }
 
-        if($token){
-            $authorization = "x-acess-authorization: ".$token;
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', $authorization ));
-        }else{
-            curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        if ($token) {
+            $authorization = "x-acess-authorization: " . $token;
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', $authorization));
+        } else {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         }
 
-        curl_setopt ($ch, CURLOPT_URL, $url);
-        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
         $file_contents = curl_exec($ch);
         $httpcode = curl_getinfo($ch);
 
@@ -46,34 +47,37 @@ class Controller extends BaseController
         $response = json_decode($file_contents, true);
         $response['httpcode'] = $httpcode['http_code'];
 
-        // if($response['httpcode'] == "401"){
-        //     $token = self::refreshToken($token);
-        //     return $this->fetch($url, $method, $data, $token);
-        // }
+        if ($response['httpcode'] == "401" || $response['httpcode'] == "403") {
+            $token = self::refreshToken($token);
+            return self::fetch($url, $method, $data, $token);
+        }
 
         return $response;
     }
 
-    public static function refreshToken($token){
+    public static function refreshToken($token)
+    {
         $ch = curl_init();
 
-        $timeout = 5;
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(array("token" => $token)));
-        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        $user = session()->all();
 
-        curl_setopt ($ch, CURLOPT_URL, env("API_URL")."auth/refresh");
-        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        $timeout = 5;
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(array("token" => $token, "email" => $user['email'])));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+
+        curl_setopt($ch, CURLOPT_URL, env("API_URL") . "auth/refresh");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
         $file_contents = curl_exec($ch);
         $httpcode = curl_getinfo($ch);
         curl_close($ch);
 
-       $response = json_decode($file_contents, true);
-       $response['httpcode'] = $httpcode['http_code'];
+        $response = json_decode($file_contents, true);
+        $response['httpcode'] = $httpcode['http_code'];
 
-       session(["token" => $response['data']["token"]]);
-       session()->save();
+        session(["token" => $response['data']["token"]]);
+        session()->save();
 
-       return $response['data']["token"];
+        return $response['data']["token"];
     }
 }
