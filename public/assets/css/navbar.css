@@ -3,7 +3,6 @@ nav {
     bottom: 2%;
     width: 100%;
 }
-
 nav ul {
     display: flex;
     justify-content: space-around;
@@ -32,16 +31,18 @@ nav a {
 nav i {
     font-size: 32px;
 }
-nav button{
+nav button {
     all: unset;
     text-align: center;
 }
-nav button i{
+nav button i {
     font-size: 48px;
 }
-nav a, nav button{
-    color: var(--white)!important;
+nav a,
+nav button {
+    color: var(--white) !important;
 }
-nav a:hover, nav button:hover{
-    color: var(--green)!important;
+nav a:hover,
+nav button:hover {
+    color: var(--green) !important;
 }
