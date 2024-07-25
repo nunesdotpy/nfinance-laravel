@@ -1,6 +1,5 @@
 
 <nav>
-    
     <ul>
         <li><a href="{{ route('home') }}">
             <i class="bi bi-house"></i>
@@ -11,9 +10,10 @@
             Transactions
         </a></li>
         <li>
-            <button>
+            <a href="{{ route('newtransaction') }}">
                 <i class="bi bi-plus-circle-fill"></i>
-            </button>
+                New
+            </a>
         </li>
         <li><a href="/account">
             <i class="bi bi-person-circle"></i>
