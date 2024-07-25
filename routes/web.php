@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Login;
 use App\Livewire\Balance\UserTransactions;
+use App\Livewire\Balance\NewTransaction;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -35,6 +36,7 @@ Route::group(['middleware' => 'authenticateLogin'], function () {
     });
 
     Route::get('/balance', UserTransactions::class)->name('usertransaction');
+    Route::get('/new', NewTransaction::class)->name('newtransaction');
 });
 
 Route::get('/{any}', function () {
