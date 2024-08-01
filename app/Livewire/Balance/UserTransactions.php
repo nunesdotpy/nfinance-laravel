@@ -7,14 +7,21 @@ use Livewire\Component;
 
 class UserTransactions extends Component
 {
-    public $user;
     public $transactions;
     public $hideTransaction;
 
     public function mount()
     {
-        $userid = $this->user['id'];
-        $transactions = Controller::fetch(env("API_URL") . "spent/index/$userid", "GET", null, session("token"));
+        // pega a url atual
+        $urlAtual = url()->current();
+        $userid = session()->all()['id'];
+
+        if ($urlAtual == route('transactions')) {
+            $transactions = Controller::fetch(env("API_URL") . "all/index/$userid", "GET", null, session("token"));
+            $this->transactions = $transactions['data'];
+        }
+
+        $transactions = Controller::fetch(env("API_URL") . "all/index/$userid", "GET", null, session("token"));
         $this->transactions = $transactions['data'];
     }
 
