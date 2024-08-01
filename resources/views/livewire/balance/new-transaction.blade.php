@@ -12,7 +12,7 @@
         <div class="value-type">
             <div>
                 <label for="amount">Value</label>
-                <input id="amount" type="number" step="0.1" wire:model="amount" required>
+                <input id="amount" type="number" step="0.01" wire:model="amount" required>
             </div>
             <div>
                 <label for="type">Type</label>
