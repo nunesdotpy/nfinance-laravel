@@ -5,7 +5,7 @@
             <i class="bi bi-house"></i>
             Home
         </a></li>
-        <li><a href="/transactions">
+        <li><a href="{{ route('transactions') }}">
             <i class="bi bi-arrow-down-up"></i>
             Transactions
         </a></li>
