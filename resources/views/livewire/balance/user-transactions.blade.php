@@ -1,4 +1,4 @@
-<div>
+<div class="contentapp">
     @foreach ($transactions as $transaction)
         @if (isset($hideTransaction[$transaction['_id']]['id']) &&
                 $hideTransaction[$transaction['_id']]['id'] == $transaction['_id']
@@ -24,6 +24,7 @@
             <p>R${{ $transaction['amount'] }}</p>
             <p>{{ $transaction['description'] }}</p>
             <p>{{ $transaction['date'] }}</p>
+            <p>{{ $transaction['type'] ? "Income" : "Spent" }}</p>
         </div>
         <div class="transaction-options">
             <button class="btn-primary" wire:click="editTransaction('{{ $transaction['_id'] }}')">Edit</button>
