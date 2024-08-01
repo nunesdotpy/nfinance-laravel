@@ -6,6 +6,7 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Balance\UserTransactions;
 use App\Livewire\Balance\NewTransaction;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TransactionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::group(['middleware' => 'authenticateLogin'], function () {
         return redirect()->route('home');
     });
 
+    Route::get('/transactions', [TransactionsController::class, 'index'])->name('transactions');
     Route::get('/balance', UserTransactions::class)->name('usertransaction');
     Route::get('/new', NewTransaction::class)->name('newtransaction');
 });
