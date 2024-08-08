@@ -15,11 +15,15 @@ class NewTransaction extends Component
     public $date;
     public $category;
     public $userid;
+    public $otherCategory;
 
     public function newTransaction()
     {
         $user = session()->all();
         $this->userid = $user['id'];
+        if($this->category === 'other'){
+            $this->category = $this->otherCategory;
+        }
         $request = $this->only(['name', 'amount', 'type', 'description', 'date', 'category', 'userid']);
 
         $response = Controller::fetch(env("API_URL")."$this->type/register/$this->userid", "POST", $request, session("token"));
