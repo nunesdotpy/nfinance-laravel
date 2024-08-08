@@ -1,8 +1,6 @@
 <div class="new-transaction">
-    <div>
-        <a href="{{ route('home') }}">< Back</a>
-    </div>
-    <h2>New transaction</h2>    
+    <x-back-button />
+    <h2>New transaction</h2>
     {{-- formulario para enviar transação --}}
     <form wire:submit="newTransaction">
         <div>
@@ -19,10 +17,10 @@
                 <select id="type" wire:model="type" required>
                     <option value="spent" selected>Spent</option>
                     <option value="income">Incoming</option>
+                    <option value="investiment">Investment</option>
                 </select>
             </div>
         </div>
-       
         <div>
             <label for="description">Description</label>
             <input id="description" type="text" wire:model="description">
@@ -40,11 +38,24 @@
                 <option value="health">Health</option>
                 <option value="education">Education</option>
                 <option value="salary">Salary</option>
-                <option value="others">Others</option>
+                <option value="other">Other</option>
             </select>
+            <input hidden type="text" id="otherCategory" wire:model="otherCategory" />
         </div>
         <div>
             <button class="btn-primary" type="submit">Send</button>
         </div>
     </form>
+    <script defer>
+        const selectCategory = document.getElementById("category");
+
+        selectCategory.addEventListener("change", (e) => {
+            const category = e.target.value;
+
+            if (category === "other") {
+                return document.getElementById("otherCategory").hidden = false;
+            }
+            return document.getElementById("otherCategory").hidden = true;
+        });
+    </script>
 </div>
