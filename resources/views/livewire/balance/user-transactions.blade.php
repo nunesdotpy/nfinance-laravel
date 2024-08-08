@@ -28,7 +28,7 @@
         </div>
         <div class="transaction-options">
             <button class="btn-primary" wire:click="editTransaction('{{ $transaction['_id'] }}')">Edit</button>
-            <button class="btn-primary" onclick="deleteTransaction()" wire:click="delete('{{ $transaction['_id'] }}')">Delete</button>
+            <button class="btn-primary" wire:click="delete('{{ $transaction['_id'] }}')">Delete</button>
         </div>
 </div>
 @endforeach
